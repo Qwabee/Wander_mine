@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -40,7 +39,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            mMap.setMyLocationEnabled(true);
+            map.setMyLocationEnabled(true);
         } else {
             ActivityCompat.requestPermissions(this, new String[]
                             {Manifest.permission.ACCESS_FINE_LOCATION},
@@ -48,7 +47,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    private void setMapLongClick(final GoogleMap map) {
+   /* private void setMapLongClick(final GoogleMap map) {
 
         // Add a blue marker to the map when the user performs a long click.
         map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
@@ -67,10 +66,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 (BitmapDescriptorFactory.HUE_BLUE)));
             }
         });
-    }
+    }*/
 
 
-    private void setPoiClick(final GoogleMap map) {
+/*    private void setPoiClick(final GoogleMap map) {
         map.setOnPoiClickListener(new GoogleMap.OnPoiClickListener() {
             @Override
             public void onPoiClick(PointOfInterest poi) {
@@ -81,6 +80,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 poiMarker.setTag(getString(R.string.poi));
             }
         });
+    }*/
+    private void setMarkerClickListener(final GoogleMap map){
+        map.setOnMarkerClickListener(
+                new OnMarkerClickListener(){
+                    @Override
+                    public boolean onMarkerClick(Marker marker){
+                        SightName = mMarkers
+                    }
+        }
+        )
+
     }
 
     private void setInfoWindowClickToPanorama(GoogleMap map) {
@@ -152,6 +162,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         poiMarker.setTag("poi");
     }
 
+    //set marker when calling, pass parameter mMap Latlng, String
+    public void setMarker(final GoogleMap map,
+                          LatLng position,
+                          String name,
+                          String snippetText){
+        map.addMarker(new MarkerOptions()
+                .position(position)
+                .title(name)
+                .snippet(snippetText));
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions,
@@ -184,8 +205,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home, zoom));
-        setMapLongClick(mMap);
-        setPoiClick(mMap);
+        //setMapLongClick(mMap);
+        //setPoiClick(mMap);
         enableMyLocation(mMap);
         setInfoWindowClickToPanorama(mMap);
 
