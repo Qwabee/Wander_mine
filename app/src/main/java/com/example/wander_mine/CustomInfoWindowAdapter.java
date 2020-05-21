@@ -28,22 +28,22 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         final String[] str=snippet.split("_");
 
         TextView tvAddress = (TextView) view.findViewById(R.id.address);
-         if(!str[0].euqals("")){
+         if(!str[0].equals("")){
              tvAddress .setText(str[0]);
         }
 
         TextView tvURL = (TextView) view.findViewById(R.id.URL);
-        if(!str[1].euqals("")){
+        if(!str[1].equals("")){
             tvURL .setText(str[1]);
         }
 
         TextView tvPrice = (TextView) view.findViewById(R.id.Price);
-        if(!str[2].euqals("")){
+        if(!str[2].equals("")){
             tvPrice .setText(str[2]);
         }
 
         TextView tvOpenTime = (TextView) view.findViewById(R.id.OpenTime);
-        if(!str[3].euqals("")){
+        if(!str[3].equals("")){
             tvOpenTime .setText(str[3]);
         }
 
@@ -59,11 +59,13 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
     @Override
     public View getInfoWindow(Marker marker){
-        return null;
+        rendowWindowText(marker, mWindow);
+        return mWindow;
     }
 
     @Override
     public View getInfoContents(Marker marker){
-        return null;
+        rendowWindowText(marker, mWindow);
+        return mWindow;
     }
 }

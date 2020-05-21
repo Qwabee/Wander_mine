@@ -14,26 +14,33 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.StreetViewPanoramaOptions;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.SupportStreetViewPanoramaFragment;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
+//import com.google.android.gms.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PointOfInterest;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.util.Locale;
-
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback{
+ //   public class MapsActivity extends AppCompatActivity implements OnMarkerClickListener,
+   //     OnMapReadyCallback {
 
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private GoogleMap mMap;
     private static final String TAG = MapsActivity.class.getSimpleName();
+    private Marker mMarker;
 
     private void enableMyLocation(GoogleMap map) {
         if (ContextCompat.checkSelfPermission(this,
@@ -83,13 +90,37 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }*/
     private void setMarkerClickListener(final GoogleMap map){
         map.setOnMarkerClickListener(
-                new OnMarkerClickListener(){
+                new OnMarkerClickListener() {
                     @Override
-                    public boolean onMarkerClick(Marker marker){
-                        SightName = mMarkers
+                    public boolean onMarkerClick(Marker marker) {
+                        Log.d(TAG, "onClick: Marker is clicked by user!");
+                        try {
+                            if (mMarker.isInfoWindowShown()) {
+                                mMarker.hideInfoWindow();
+                                return false;
+                            } else {
+                                Log.d(TAG, "onClick: infowindow is shown");
+                                mMarker.showInfoWindow();
+                                return true;
+                            }
+                        } catch (NullPointerException e) {
+                            Log.e(TAG, "onClick: NullPointerException: " + e.getMessage());
+                            return false;
+                        }
                     }
-        }
-        )
+                }
+        );
+    }
+
+    //move camera
+    private void moveCamera(LatLng latLng, float zoom){
+        Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+
+        mMap.clear();
+
+        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
+
 
     }
 
