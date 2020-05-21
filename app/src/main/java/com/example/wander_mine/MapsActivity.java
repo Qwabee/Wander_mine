@@ -95,12 +95,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     public boolean onMarkerClick(Marker marker) {
                         Log.d(TAG, "onClick: Marker is clicked by user!");
                         try {
-                            if (mMarker.isInfoWindowShown()) {
-                                mMarker.hideInfoWindow();
+                            if (marker.isInfoWindowShown()) {
+                                marker.hideInfoWindow();
                                 return false;
                             } else {
                                 Log.d(TAG, "onClick: infowindow is shown");
-                                mMarker.showInfoWindow();
+                                marker.showInfoWindow();
                                 return true;
                             }
                         } catch (NullPointerException e) {
@@ -124,7 +124,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    private void setInfoWindowClickToPanorama(GoogleMap map) {
+/*    private void setInfoWindowClickToPanorama(GoogleMap map) {
         map.setOnInfoWindowClickListener(
                 new GoogleMap.OnInfoWindowClickListener() {
                     @Override
@@ -145,7 +145,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         }
                     }
                 });
-    }
+    }*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -228,8 +228,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // Add a marker in Sydney and move the camera
         // LatLng sydney = new LatLng(-34, 151);
+        // home = hkust
         LatLng home = new LatLng(222.338005, 114.264112);
-
+        Marker demo_use = mMap.addMarker(new MarkerOptions()
+                .position(home)
+                .title("HKUST")
+                .snippet("中华路七号_www. baidu. com_37块钱成人票_早上七点到晚上七点"));
         // zoom level 15: street    10:city  20:buildings
         float zoom = 15;
 
@@ -239,7 +243,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         //setMapLongClick(mMap);
         //setPoiClick(mMap);
         enableMyLocation(mMap);
-        setInfoWindowClickToPanorama(mMap);
+        //setInfoWindowClickToPanorama(mMap);
 
 
         try {
