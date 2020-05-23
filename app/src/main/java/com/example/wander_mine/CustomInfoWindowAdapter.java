@@ -1,7 +1,9 @@
 //# COMP 4521    #  CHEN ZIYI       20319433          zchenbu@connect.ust.hk
+//# COMP 4521    #  FENG ZIHAN      20412778          zfengae@ust.uk
 package com.example.wander_mine;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -10,6 +12,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
 public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
+    private static final String TAG = CustomInfoWindowAdapter.class.getSimpleName();
     private final View mWindow;
     private Context mContext;
 
@@ -26,8 +29,9 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         //Snippet  ="First String"+"_"+"Second String"
         // Snippet = address+url+price+open time
         String snippet = marker.getSnippet();
-        final String[] str=snippet.split("_");
+        String[] str=snippet.split("_");
 
+        //Log.i(TAG, "davy " + str.length);
         TextView tvAddress = (TextView) view.findViewById(R.id.address);
          if(!str[0].equals("")){
              tvAddress .setText(str[0]);

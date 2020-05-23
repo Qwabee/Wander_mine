@@ -1,0 +1,62 @@
+[
+    {
+        "id" : 1,
+        "name" : "Hong Kong Disneyland",
+        "LatLng" : [22.3130,114.0413],
+        "info" : "Hong Kong Disneyland, Lantau Island, Outlying Islands_hongkongdisneyland.com_HK$ 639_10:30 - 20:00"
+    },
+    {
+        "id" : 2,
+        "name" : "The Peak",
+        "LatLng" : [22.2759,114.1455],
+        "info" : "Mid-Levels, Hong Kong_www.thepeak.com.hk_Free_24hrs"
+    },
+    {
+        "id" : 3,
+        "name" : "Tsim Sha Tsui Promenade",
+        "LatLng" : [22.2973,114.1784],
+        "info" : "Tsim Sha Tsui, Kowloon_NA_Free_24hrs"
+    },
+    {
+        "id" : 4,
+        "name" : "Ladies' Market",
+        "LatLng" : [22.3176,114.1709],
+        "info" : "Tung Choi Street, Mong Kok, Kowloon_Tsim Sha Tsui_NA_Free_24hrs"
+    },
+    {
+        "id" : 5,
+        "name" : "Ocean Park Hong Kong",
+        "LatLng" : [22.2467,114.1757],
+        "info" : "Wong Chuk Hang, Hong Kong Island_www.oceanpark.com.hk_HK$ 498_10:00 - 19:00"
+    },
+    {
+        "id" : 6,
+        "name" : "Temple Street Night Market",
+        "LatLng" : [22.3070,114.1700],
+        "info" : "Temple Street, Yau Ma Tei, Kowloon_Tsim Sha Tsui_NA_Free_24hrs"
+    },
+    {
+        "id" : 7,
+        "name" : "Lan Kwai Fong",
+        "LatLng" : [22.2808,114.1557],
+        "info" :"38-44 D'Aguilar Street, Central, Hong Kong Island_www.lankwaifong.com_Free_24hrs"
+    },
+    {
+        "id" : 8,
+        "name" : "Golden Bauhinia Square (and HKCEC)",
+        "LatLng" : [22.2844,114.1739],
+        "info" : "1 Expo Drive, Wan Chai, Hong Kong Island_www.hkcec.com_Free_24hrs"
+    },
+    {
+        "id" : 9,
+        "name" : "Stanley",
+        "LatLng" : [22.2204,114.2127],
+        "info" : "Stanley, Hong Kong Island_NA_Free_24hrs"
+    },
+    {
+        "id" : 10,
+        "name" : "Shek O",
+        "LatLng" : [22.2334,114.2420],
+        "info" : "Shek O, Hong Kong Island_NA_Free_24hrs"
+    }
+]

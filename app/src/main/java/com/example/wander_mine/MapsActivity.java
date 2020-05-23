@@ -1,4 +1,5 @@
 //# COMP 4521    #  CHEN ZIYI       20319433          zchenbu@connect.ust.hk
+//# COMP 4521    #  FENG ZIHAN      20412778          zfengae@ust.uk
 package com.example.wander_mine;
 
 import androidx.annotation.NonNull;
@@ -7,6 +8,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -15,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,15 +37,22 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PointOfInterest;
 import com.google.android.gms.maps.model.LatLngBounds;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback{
- //   public class MapsActivity extends AppCompatActivity implements OnMarkerClickListener,
-   //     OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+    //   public class MapsActivity extends AppCompatActivity implements OnMarkerClickListener,
+    //     OnMapReadyCallback {
 
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private GoogleMap mMap;
     private static final String TAG = MapsActivity.class.getSimpleName();
     private Marker mMarker;
+    private Context context;
 
     private void enableMyLocation(GoogleMap map) {
         if (ContextCompat.checkSelfPermission(this,
@@ -77,19 +88,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }*/
 
 
-/*    private void setPoiClick(final GoogleMap map) {
-        map.setOnPoiClickListener(new GoogleMap.OnPoiClickListener() {
-            @Override
-            public void onPoiClick(PointOfInterest poi) {
-                Marker poiMarker = map.addMarker(new MarkerOptions()
-                        .position(poi.latLng)
-                        .title(poi.name));
-                poiMarker.showInfoWindow();
-                poiMarker.setTag(getString(R.string.poi));
-            }
-        });
-    }*/
-    private void setMarkerClickListener(final GoogleMap map){
+    /*    private void setPoiClick(final GoogleMap map) {
+            map.setOnPoiClickListener(new GoogleMap.OnPoiClickListener() {
+                @Override
+                public void onPoiClick(PointOfInterest poi) {
+                    Marker poiMarker = map.addMarker(new MarkerOptions()
+                            .position(poi.latLng)
+                            .title(poi.name));
+                    poiMarker.showInfoWindow();
+                    poiMarker.setTag(getString(R.string.poi));
+                }
+            });
+        }*/
+    private void setMarkerClickListener(final GoogleMap map) {
         map.setOnMarkerClickListener(
                 new OnMarkerClickListener() {
                     @Override
@@ -114,40 +125,37 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     //move camera
-    private void moveCamera(LatLng latLng, float zoom){
-        Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+//    private void moveCamera(LatLng latLng, float zoom) {
+//        Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude);
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+//
+//        // if bug, comment clear function
+//        mMap.clear();
+//
+//    }
 
-        // if bug, comment clear function
-        mMap.clear();
+    /*    private void setInfoWindowClickToPanorama(GoogleMap map) {
+            map.setOnInfoWindowClickListener(
+                    new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+                            if (marker.getTag() == "poi") {
+                                StreetViewPanoramaOptions options =
+                                        new StreetViewPanoramaOptions().position(
+                                                marker.getPosition());
+                                SupportStreetViewPanoramaFragment streetViewFragment
+                                        = SupportStreetViewPanoramaFragment
+                                        .newInstance(options);
 
-        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
-
-
-    }
-
-/*    private void setInfoWindowClickToPanorama(GoogleMap map) {
-        map.setOnInfoWindowClickListener(
-                new GoogleMap.OnInfoWindowClickListener() {
-                    @Override
-                    public void onInfoWindowClick(Marker marker) {
-                        if (marker.getTag() == "poi") {
-                            StreetViewPanoramaOptions options =
-                                    new StreetViewPanoramaOptions().position(
-                                            marker.getPosition());
-                            SupportStreetViewPanoramaFragment streetViewFragment
-                                    = SupportStreetViewPanoramaFragment
-                                    .newInstance(options);
-
-                            // Replace the fragment and add it to the backstack
-                            getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.fragment_container,
-                                            streetViewFragment)
-                                    .addToBackStack(null).commit();
+                                // Replace the fragment and add it to the backstack
+                                getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.fragment_container,
+                                                streetViewFragment)
+                                        .addToBackStack(null).commit();
+                            }
                         }
-                    }
-                });
-    }*/
+                    });
+        }*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -199,7 +207,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void setMarker(final GoogleMap map,
                           LatLng position,
                           String name,
-                          String snippetText){
+                          String snippetText) {
         map.addMarker(new MarkerOptions()
                 .position(position)
                 .title(name)
@@ -227,16 +235,32 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
         // Add a marker in hkust and move the camera
         // home = hkust
-        LatLng home = new LatLng(222.338005, 114.264112);
-        Marker demo_use = mMap.addMarker(new MarkerOptions()
-                .position(home)
-                .title("HKUST")
-                .snippet("中华路七号_www. baidu. com_37块钱成人票_早上七点到晚上七点"));
+        String json = readJson();
+        List<Attraction> list = new ArrayList<>();
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            //Attraction list = mapper.readValue(getFromAssets(), Attraction.class);
+            list = mapper.readValue(json,new TypeReference<List<Attraction>>() { });
+        }
+        catch (Exception e){e.printStackTrace();}
+
+        LatLng home = new LatLng(22.2798, 114.1922);
+
+        for(int i = 0; i < list.size(); i++) {
+            Attraction tmp = list.get(i);
+            LatLng helper = new LatLng(tmp.getLatLng()[0], tmp.getLatLng()[1]);
+            setMarker(mMap, helper, tmp.getName(), tmp.getInfo());
+            Log.i(TAG, " zfengae " + tmp.getLatLng()[0]);
+        }
+//        Marker demo_use = mMap.addMarker(new MarkerOptions()
+//                .position(home)
+//                .title("HKUST")
+//                .snippet("中华路七号_www. baidu. com_37块钱成人票_早上七点到晚上七点"));
         // zoom level 15: street    10:city  20:buildings
-        float zoom = 15;
+        float zoom = 12;
 
         // mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
@@ -245,7 +269,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         //setPoiClick(mMap);
         enableMyLocation(mMap);
         //setInfoWindowClickToPanorama(mMap);
-
 
         try {
             // Customize the styling of the base map using a JSON object defined
@@ -260,5 +283,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         } catch (Resources.NotFoundException e) {
             Log.e(TAG, "Can't find style. Error: ", e);
         }
+    }
+
+    public String readJson(){
+        try {
+            InputStreamReader inputReader = new InputStreamReader( getResources().getAssets().open("data.json") );
+            BufferedReader bufReader = new BufferedReader(inputReader);
+            String line="";
+            String Result="";
+            while((line = bufReader.readLine()) != null)
+                Result += line;
+            return Result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
