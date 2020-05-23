@@ -1,3 +1,4 @@
+//# COMP 4521    #  CHEN ZIYI       20319433          zchenbu@connect.ust.hk
 package com.example.wander_mine;
 
 import android.content.Context;

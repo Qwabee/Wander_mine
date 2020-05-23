@@ -1,3 +1,4 @@
+//# COMP 4521    #  CHEN ZIYI       20319433          zchenbu@connect.ust.hk
 package com.example.wander_mine;
 
 import androidx.annotation.NonNull;
@@ -226,8 +227,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        // LatLng sydney = new LatLng(-34, 151);
+        // Add a marker in hkust and move the camera
         // home = hkust
         LatLng home = new LatLng(222.338005, 114.264112);
         Marker demo_use = mMap.addMarker(new MarkerOptions()
