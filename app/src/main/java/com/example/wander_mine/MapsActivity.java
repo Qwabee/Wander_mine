@@ -9,13 +9,17 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -53,6 +57,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final String TAG = MapsActivity.class.getSimpleName();
     private Marker mMarker;
     private Context context;
+
 
     private void enableMyLocation(GoogleMap map) {
         if (ContextCompat.checkSelfPermission(this,
@@ -253,7 +258,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Attraction tmp = list.get(i);
             LatLng helper = new LatLng(tmp.getLatLng()[0], tmp.getLatLng()[1]);
             setMarker(mMap, helper, tmp.getName(), tmp.getInfo());
-            Log.i(TAG, " zfengae " + tmp.getLatLng()[0]);
         }
 //        Marker demo_use = mMap.addMarker(new MarkerOptions()
 //                .position(home)
@@ -299,4 +303,22 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         return null;
     }
+
+
+//    public void openWebsite(View view) {
+//        TextView tvURL = (TextView) view.findViewById(R.id.URL);
+//        String url = tvURL.getText().toString().split(" ")[1];
+//        Log.i(TAG, "zfengae");
+//        // Parse the URI and create the intent.
+//        if(!url.equals("NA")) {
+//            Uri webpage = Uri.parse(url);
+//            Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+//            // Find an activity to hand the intent and start that activity.
+//            if (intent.resolveActivity(getPackageManager()) != null) {
+//                startActivity(intent);
+//            } else {
+//                Log.d("ImplicitIntents", "Can't handle this intent!");
+//            }
+//        }
+//    }
 }

@@ -3,6 +3,11 @@
 package com.example.wander_mine;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,22 +39,41 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         //Log.i(TAG, "davy " + str.length);
         TextView tvAddress = (TextView) view.findViewById(R.id.address);
          if(!str[0].equals("")){
-             tvAddress .setText(str[0]);
+             String tmp = "Address:" + str[0];
+             tvAddress .setText(tmp);
         }
 
         TextView tvURL = (TextView) view.findViewById(R.id.URL);
         if(!str[1].equals("")){
-            tvURL .setText(str[1]);
+            if(str[1].equals("NA")) {
+                String tmp = "Website: " + str[1];
+                tvURL.setText(tmp);
+            }
+            else {
+                tvURL.setMovementMethod(LinkMovementMethod.getInstance());
+                StringBuilder helper = new StringBuilder("Website: ");
+                helper.append("<a href = \"https://");
+                helper.append(str[1]);
+                helper.append("\">");
+                helper.append(str[1]);
+                helper.append("</a>");
+                tvURL.setText(Html.fromHtml(helper.toString()));
+                Linkify.addLinks(tvURL,Linkify.WEB_URLS);
+            }
+//            String tmp = "Website: " + str[1];
+//            tvURL.setText(tmp);
         }
 
         TextView tvPrice = (TextView) view.findViewById(R.id.Price);
         if(!str[2].equals("")){
-            tvPrice .setText(str[2]);
+            String tmp = "Ticket Price: " + str[2];
+            tvPrice .setText(tmp);
         }
 
         TextView tvOpenTime = (TextView) view.findViewById(R.id.OpenTime);
         if(!str[3].equals("")){
-            tvOpenTime .setText(str[3]);
+            String tmp = "Opening Hours: " + str[3];
+            tvOpenTime .setText(tmp);
         }
 
 
@@ -73,4 +97,5 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         rendowWindowText(marker, mWindow);
         return mWindow;
     }
+
 }
