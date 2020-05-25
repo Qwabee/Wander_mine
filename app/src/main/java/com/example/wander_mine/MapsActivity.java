@@ -71,40 +71,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-   /* private void setMapLongClick(final GoogleMap map) {
 
-        // Add a blue marker to the map when the user performs a long click.
-        map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-            @Override
-            public void onMapLongClick(LatLng latLng) {
-                String snippet = String.format(Locale.getDefault(),
-                        getString(R.string.lat_long_snippet),
-                        latLng.latitude,
-                        latLng.longitude);
-
-                map.addMarker(new MarkerOptions()
-                        .position(latLng)
-                        .title(getString(R.string.dropped_pin))
-                        .snippet(snippet)
-                        .icon(BitmapDescriptorFactory.defaultMarker
-                                (BitmapDescriptorFactory.HUE_BLUE)));
-            }
-        });
-    }*/
-
-
-    /*    private void setPoiClick(final GoogleMap map) {
-            map.setOnPoiClickListener(new GoogleMap.OnPoiClickListener() {
-                @Override
-                public void onPoiClick(PointOfInterest poi) {
-                    Marker poiMarker = map.addMarker(new MarkerOptions()
-                            .position(poi.latLng)
-                            .title(poi.name));
-                    poiMarker.showInfoWindow();
-                    poiMarker.setTag(getString(R.string.poi));
-                }
-            });
-        }*/
     private void setMarkerClickListener(final GoogleMap map) {
         map.setOnMarkerClickListener(
                 new OnMarkerClickListener() {
@@ -129,38 +96,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         );
     }
 
-    //move camera
-//    private void moveCamera(LatLng latLng, float zoom) {
-//        Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude);
-//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
-//
-//        // if bug, comment clear function
-//        mMap.clear();
-//
-//    }
 
-    /*    private void setInfoWindowClickToPanorama(GoogleMap map) {
-            map.setOnInfoWindowClickListener(
-                    new GoogleMap.OnInfoWindowClickListener() {
-                        @Override
-                        public void onInfoWindowClick(Marker marker) {
-                            if (marker.getTag() == "poi") {
-                                StreetViewPanoramaOptions options =
-                                        new StreetViewPanoramaOptions().position(
-                                                marker.getPosition());
-                                SupportStreetViewPanoramaFragment streetViewFragment
-                                        = SupportStreetViewPanoramaFragment
-                                        .newInstance(options);
 
-                                // Replace the fragment and add it to the backstack
-                                getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.fragment_container,
-                                                streetViewFragment)
-                                        .addToBackStack(null).commit();
-                            }
-                        }
-                    });
-        }*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -200,15 +138,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-/*    public void onPoiClick(PointOfInterest poi) {
-        Marker poiMarker = mMap.addMarker(new MarkerOptions()
-                .position(poi.latLng)
-                .title(poi.name));
-        poiMarker.showInfoWindow();
-        poiMarker.setTag("poi");
-    }*/
 
-    //set marker when calling, pass parameter mMap Latlng, String
     public void setMarker(final GoogleMap map,
                           LatLng position,
                           String name,
@@ -268,7 +198,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        
+
         //move camera to hkust
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home, zoom));
         //setMapLongClick(mMap);
