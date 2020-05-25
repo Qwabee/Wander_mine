@@ -3,7 +3,7 @@
         "id" : 1,
         "name" : "Hong Kong Disneyland",
         "LatLng" : [22.3130,114.0413],
-        "info" : "Hong Kong Disneyland, Lantau Island, Outlying Islands_hongkongdisneyland.com_HK$ 639_10:30 - 20:00"
+        "info" : "Hong Kong Disneyland, Lantau Island_hongkongdisneyland.com_HK$ 639_10:30 - 20:00"
     },
     {
         "id" : 2,
@@ -21,7 +21,7 @@
         "id" : 4,
         "name" : "Ladies' Market",
         "LatLng" : [22.3176,114.1709],
-        "info" : "Tung Choi Street, Mong Kok, Kowloon_Tsim Sha Tsui_NA_Free_24hrs"
+        "info" : "Tung Choi Street, Mong Kok_NA_Free_24hrs"
     },
     {
         "id" : 5,
@@ -33,19 +33,19 @@
         "id" : 6,
         "name" : "Temple Street Night Market",
         "LatLng" : [22.3070,114.1700],
-        "info" : "Temple Street, Yau Ma Tei, Kowloon_Tsim Sha Tsui_NA_Free_24hrs"
+        "info" : "Temple Street, Yau Ma Tei_NA_Free_24hrs"
     },
     {
         "id" : 7,
         "name" : "Lan Kwai Fong",
         "LatLng" : [22.2808,114.1557],
-        "info" :"38-44 D'Aguilar Street, Central, Hong Kong Island_www.lankwaifong.com_Free_24hrs"
+        "info" :"38-44 D'Aguilar Street, Central_www.lankwaifong.com_Free_24hrs"
     },
     {
         "id" : 8,
-        "name" : "Golden Bauhinia Square (and HKCEC)",
+        "name" : "Golden Bauhinia Square",
         "LatLng" : [22.2844,114.1739],
-        "info" : "1 Expo Drive, Wan Chai, Hong Kong Island_www.hkcec.com_Free_24hrs"
+        "info" : "1 Expo Drive, Wan Chai_www.hkcec.com_Free_24hrs"
     },
     {
         "id" : 9,
