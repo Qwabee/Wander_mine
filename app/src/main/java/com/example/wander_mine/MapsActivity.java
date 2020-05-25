@@ -241,8 +241,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
-        // Add a marker in hkust and move the camera
-        // home = hkust
+
         String json = readJson();
         List<Attraction> list = new ArrayList<>();
         try {
@@ -252,6 +251,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         catch (Exception e){e.printStackTrace();}
 
+        //hkust position
         LatLng home = new LatLng(22.2798, 114.1922);
 
         for(int i = 0; i < list.size(); i++) {
@@ -268,6 +268,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        
+        //move camera to hkust
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home, zoom));
         //setMapLongClick(mMap);
         //setPoiClick(mMap);
